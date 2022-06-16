@@ -37,11 +37,13 @@ use App\Http\Controllers\OrderController;
                      <div class="card h-100 mx-2" style="width: 18rem;margin-bottom: -1em">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
-                       <div class="card-body d-flex flex-column">
-                         <input type="hidden" name="productId" value="{{$product->id}}">
-                         <h5 class="card-title" name="product">{{$product->name}}</h5>
-                         <p class="card-text" name="description">{{$product->description}}</p>
-                       </div>
+                        <a href="products/details/{{$product->id}}" class="" style="text-decoration: none; color: inherit;">
+                          <div class="card-body d-flex flex-column">
+                            <input type="hidden" name="productId" value="{{$product->id}}">
+                            <h5 class="card-title" name="product">{{$product->name}}</h5>
+                            <p class="card-text" name="description">{{$product->description}}</p>
+                        </div>
+                      </a>
                        <ul class="list-group list-group-flush">
                          <li class="list-group-item">
 

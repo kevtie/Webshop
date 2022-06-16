@@ -32,4 +32,4 @@ Route::post('/products/removeproduct', [OrderController::class, 'removeFromCart'
 Route::get('/order', [PageController::class, 'order'])->name('order')->middleware('checklogin');
 Route::post('/order/buy', [OrderController::class, 'payment'])->name('pay')->middleware('checklogin');
 Route::get('/orderhistory', function(){return view('orderHistory');})->name('orderhistory')->middleware('checklogin');
-Route::get('/products/details/{key}', [ProductDetailController::class, 'getProductPage'])->name('productdetail')->middleware('checklogin');
+Route::get('/products/details/{product}', [ProductDetailController::class, 'getProductPage'])->name('productdetail')->middleware('checklogin');

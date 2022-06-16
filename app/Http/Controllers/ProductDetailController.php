@@ -7,9 +7,15 @@ use App\Models\Product;
 
 class ProductDetailController extends Controller
 {
-    public static function getProductPage($key){
-      $products = Product::with('categories')->where('id', $key)->first();
+    public function getProductPage(Request $request, Product $product) {
+      //$products = Product::with('categories')->where('id', $product)->first();
 
-      return $products;
+      return view('productDetail', ['product' => $product, 'categories'=>$product->categories]);
+    }
+
+    public static function seperate(string $categories){
+
+      $name = explode(', ', $categories);
+      return $name;
     }
 }

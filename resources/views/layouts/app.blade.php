@@ -23,7 +23,11 @@
                     </ul>
                     <ul class="navbar-nav">
                       <li class="navbar-text">
-                        <span class="navbar-text">Welcome! {{Auth::user()->name}}</a>
+                        <form method="post">
+                        <span class="row"><input type="text" class="form-control"   placeholder="Search..." id="search"></span>
+                      </li>
+                      <li class="navbar-text">
+                        <span class="navbar-text row">Welcome! {{Auth::user()->name}}</span>
                       </li>
                     </ul>
                 </div>
