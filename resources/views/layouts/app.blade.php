@@ -23,11 +23,18 @@
                     </ul>
                     <ul class="navbar-nav">
                       <li class="navbar-text">
-                        <form method="post">
-                        <span class="row"><input type="text" class="form-control"   placeholder="Search..." id="search"></span>
+                        <form method="post" action="{{ route('showSearch') }}">
+                          @csrf
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search..." id="search">
+                        <div class="input-group-append">
+                        <input class="btn btn-outline-secondary" type="submit" value="search">
+                        </div>
+                      </div>
+                    </form>
                       </li>
                       <li class="navbar-text">
-                        <span class="navbar-text row">Welcome! {{Auth::user()->name}}</span>
+                        <span class="navbar-text row mx-2">Welcome! {{Auth::user()->name}}</span>
                       </li>
                     </ul>
                 </div>

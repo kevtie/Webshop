@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\SearchController;
 
 
 /*
@@ -23,13 +24,15 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::match(['get', 'post'], '/login/authenticate', [LoginController::class, 'authenticate'])->name('auth');
+Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('auth');
 Route::get('/home', [PageController::class, 'home'])->name('home')->middleware('checklogin');
-Route::match(['get', 'post'], '/products', [PageController::class, 'products'])->name('product')->middleware('checklogin');
+Route::get('/products', [PageController::class, 'products'])->name('product')->middleware('checklogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::match(['get', 'post'], '/products/addproduct', [OrderController::class, 'addToCart'])->name('addtocart')->middleware('checklogin');
-Route::match(['get', 'post'], '/products/removeproduct', [OrderController::class, 'removeFromCart'])->name('removefromcart')->middleware('checklogin');
-Route::match(['get', 'post'], '/order', [PageController::class, 'order'])->name('order')->middleware('checklogin');
-Route::match(['get', 'post'], '/order/buy', [OrderController::class, 'payment'])->name('pay')->middleware('checklogin');
+Route::post('/products/addproduct', [OrderController::class, 'addToCart'])->name('addtocart')->middleware('checklogin');
+Route::post('/products/removeproduct', [OrderController::class, 'removeFromCart'])->name('removefromcart')->middleware('checklogin');
+Route::get('/order', [PageController::class, 'order'])->name('order')->middleware('checklogin');
+Route::post('/order/buy', [OrderController::class, 'payment'])->name('pay')->middleware('checklogin');
 Route::get('/orderhistory', function(){return view('orderHistory');})->name('orderhistory')->middleware('checklogin');
 Route::get('/products/details/{product}', [ProductDetailController::class, 'getProductPage'])->name('productdetail')->middleware('checklogin');
+Route::get('/search', [PageController::class, 'search'])->name('search')->middleware('checklogin');
+Route::post('/search/item', [SearchController::class, 'showSearch'])->name('showSearch')->middleware('checklogin');

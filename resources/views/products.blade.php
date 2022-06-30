@@ -21,7 +21,7 @@ use App\Http\Controllers\OrderController;
   <header>
   <div class="container">
       <div class="row justify-content-center">
-          <div class="col-md-9">
+          <div class="col-md-8">
               <div class="card pb-3">
                   <div class="card-header d-flex justify-content-between align-items-center">Products
                     <div class="page-item">
@@ -33,17 +33,20 @@ use App\Http\Controllers\OrderController;
                   <div class="card-deck row">
                     @foreach (ProductController::getProduct() as $product)
                     @if($product->quantity > 0)
-                    <div class="col-md-4 col-sm-12 my-3">
-                     <div class="card h-100 mx-2" style="width: 18rem;margin-bottom: -1em">
+                    <div class="col-md-3 my-3 mx-4">
+                     <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
                         <a href="products/details/{{$product->id}}" class="" style="text-decoration: none; color: inherit;">
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
                             <h5 class="card-title" name="product">{{$product->name}}</h5>
-                            <p class="card-text" name="description">{{$product->description}}</p>
+                            <div class="overflow-hidden">
+                              <p class="card-text" name="description">{{$product->description}}</p>
+                            </div>
                         </div>
                       </a>
+                      <div class="flex">
                        <ul class="list-group list-group-flush">
                          <li class="list-group-item">
 
@@ -56,12 +59,13 @@ use App\Http\Controllers\OrderController;
                           @endif
                          </li>
                        </ul>
-                       <div class="card-footer mt-auto">
+                     </div>
+                       <div class="card-footer mt-auto my-12">
                          <div class="input-group mb-3">
                          <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}">
                          <div class="input-group-append">
                          <input class="btn btn-outline-secondary" type="submit" value="Buy">
-                          </div>
+                         </div>
                        </div>
                        </div>
                      </form>
