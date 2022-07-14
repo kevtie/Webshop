@@ -3,7 +3,6 @@
   use App\Models\Order;
   use App\Models\Product;
   use App\Models\Customer;
-  //dd(Ordercontroller::getOrder()->pluck('products')->flatten());
   $total = 0;
  ?>
 @extends('layouts.app')

@@ -11,15 +11,19 @@ use App\Http\Controllers\ProductDetailController;
             <div class="card pb-3">
                 <div class="card-header d-flex justify-content-between align-items-center">Product details
                 </div>
-                <div class="card-deck row">
+                <div class="card-deck row mx-3">
                   {{$product->name}} <br>
                   {{$product->description}} <br>
-                  <div class="row d-flex justify-content-center align-items-center">
-                    @forelse($categories->pluck('name') as $category)
-                      <div class="badge badge-pill bg-secondary justify-content-center row" style="width: auto;">{{$category}}                      </div>
-                    @empty
-                      No relevant categories found!
-                    @endforelse
+                  <div class="row d-flex justify-content-end align-items-end">
+                    <div class="card " style="width: auto;">
+                      <div class="card-body">
+                        @forelse($categories->pluck('name') as $category)
+                          <div class="badge badge-pill bg-secondary justify-content-center row" style="width: auto;">{{$category}}</div>,
+                        @empty
+                          No relevant categories found!
+                        @endforelse
+                      </div>
+                    </div>
                   </div>
                 </div>
             </div>

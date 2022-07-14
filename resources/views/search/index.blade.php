@@ -2,7 +2,8 @@
 use App\Http\Controllers\SearchController;
  ?>
 
-<html lang="en">
+ @extends('layouts.app')
+ @section('content')
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,27 +16,39 @@ use App\Http\Controllers\SearchController;
          <div class="col-md-12">
            <div class="card">
               <div class="card-body">
-                  <form action="" method="POST">
+                  <form action="{{ route('showSearch') }}" method="post">
+                    @csrf
                       <div class="row">
                         <div class="col-md-6">
                           <div class="input-group mb-3">
-                            <input type="text" class="form-control"   placeholder="Search employee" id="search">
+                            <input type="text" class="form-control" placeholder="Search..." name="search" id="search">
                             <div class="input-group-prepend">
                               <input type="submit" class="btn btn-outline-secondary">
-                            </div>
-                            <div>
-                              @forelse(SearchController::showSearch() as $result)
-
-
-
-                              @empty
-
-                              @endforelse
                             </div>
                           </div>
                         </div>
                       </div>
                   </form>
+                  <div>
+                  <table class="table table-hover">
+                    <th><b>Name</b></th>
+                    <th><b>Description</b></th>
+                    <th></th>
+                  @forelse($search_results as $search)
+                  <div>
+                      <tr>
+                        <td>{{$search->name}}</td>
+                        <td>{{$search->description}}</td>
+                        <td><a href="products/details/{{$search->id}}" class="btn btn-outline-secondary">Go to page</a></td>
+                      </tr>
+                  </div>
+                  @empty
+                  <div>
+                    No results were found!
+                  </div>
+                  @endforelse
+                </table>
+                </div>
             </div>
           </div>
         </div>
@@ -43,3 +56,4 @@ use App\Http\Controllers\SearchController;
     </div>
 </body>
 </html>
+@endsection

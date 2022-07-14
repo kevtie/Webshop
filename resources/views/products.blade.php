@@ -49,13 +49,14 @@ use App\Http\Controllers\OrderController;
                       <div class="flex">
                        <ul class="list-group list-group-flush">
                          <li class="list-group-item">
-
                           @if(count($product->categories) < 1)
                             No relevant categories found.
                           @else
+                          <div class="flex overflow-hidden">
                             @foreach ($product->categories as $category)
                               {{$category->name}}
                             @endforeach
+                          </div>
                           @endif
                          </li>
                        </ul>

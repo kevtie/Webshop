@@ -26,7 +26,7 @@
                         <form method="post" action="{{ route('showSearch') }}">
                           @csrf
                         <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search..." id="search">
+                        <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
                         <div class="input-group-append">
                         <input class="btn btn-outline-secondary" type="submit" value="search">
                         </div>
