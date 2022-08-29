@@ -24,8 +24,8 @@
                 <img src="/images/{{ Session::get('fileName') }}" />
             </div>
             <div class="col-md-4">
-                <h3>Thumbnail:</h3>
-                <img src="/thumbnails/{{ Session::get('fileName') }}" />
+                <h3>Resized image:</h3>
+                <img src="/product_images/{{ Session::get('fileName') }}" />
             </div>
         </div>
         @endif
