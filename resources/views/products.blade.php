@@ -18,7 +18,7 @@ use App\Http\Controllers\OrderController;
   }
 
   </style>
-  <header>
+  <body>
   <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-8">
@@ -80,5 +80,5 @@ use App\Http\Controllers\OrderController;
           </div>
       </div>
   </div>
-  </header>
+</body>
   @endsection
