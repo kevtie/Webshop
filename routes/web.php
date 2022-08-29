@@ -19,14 +19,9 @@ use App\Http\Controllers\FileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('auth');
-Route::get('/home', [PageController::class, 'home'])->name('home')->middleware('checklogin');
+Route::get('/', [PageController::class, 'home'])->name('home')->middleware('checklogin');
 Route::get('/products', [PageController::class, 'products'])->name('product')->middleware('checklogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/products/addproduct', [OrderController::class, 'addToCart'])->name('addtocart')->middleware('checklogin');
