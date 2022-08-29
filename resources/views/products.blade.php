@@ -38,6 +38,7 @@ use App\Http\Controllers\OrderController;
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
                         <a href="products/details/{{$product->id}}" class="" style="text-decoration: none; color: inherit;">
+                          <img src="{{asset($product->image)}}" alt="Error, image could not be loaded"></img>
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
                             <h5 class="card-title" name="product">{{$product->name}}</h5>
@@ -52,7 +53,7 @@ use App\Http\Controllers\OrderController;
                           @if(count($product->categories) < 1)
                             No relevant categories found.
                           @else
-                          <div class="flex overflow-hidden">
+                          <div class="flex overflow-hidden row">
                             @foreach ($product->categories as $category)
                               {{$category->name}}
                             @endforeach

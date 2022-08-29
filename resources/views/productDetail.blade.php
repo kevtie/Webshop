@@ -12,13 +12,14 @@ use App\Http\Controllers\ProductDetailController;
                 <div class="card-header d-flex justify-content-between align-items-center">Product details
                 </div>
                 <div class="card-deck row mx-3">
+                  <img src="{{asset($product->image)}}" alt="Error, image could not be loaded"></img>
                   {{$product->name}} <br>
                   {{$product->description}} <br>
                   <div class="row d-flex justify-content-end align-items-end">
-                    <div class="card " style="width: auto;">
-                      <div class="card-body">
+                    <div class="card row overflow-auto" style="width: 14rem;">
+                      <div class="card-body btn-group">
                         @forelse($categories->pluck('name') as $category)
-                          <div class="badge badge-pill bg-secondary justify-content-center row" style="width: auto;">{{$category}}</div>,
+                          <div class="d-flex"><a class="btn btn-outline-primary btn-sm" href="" style="width: auto;">{{$category}}</a></div>
                         @empty
                           No relevant categories found!
                         @endforelse
