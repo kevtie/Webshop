@@ -26,13 +26,13 @@ class FileController extends Controller
         $image = $request->file('imgFile');
         $input['imagename'] = time().'.'.$image->extension();
 
-        $filePath = public_path('/product_images');
+        $filePath = public_path('/images');
         $img = Image::make($image->path());
         $img->resize(110, 110, function ($const) {
             $const->aspectRatio();
         })->save($filePath.'/'.$input['imagename']);
 
-        $filePath = public_path('/images');
+        $filePath = public_path('/product_images');
         $image->move($filePath, $input['imagename']);
 
         return back()

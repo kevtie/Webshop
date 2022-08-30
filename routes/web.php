@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
@@ -7,8 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FileController;
-
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +32,4 @@ Route::post('/searching', [SearchController::class, 'showSearch'])->name('showSe
 Route::get('/search', [SearchController::class, 'showSearch'])->name('search')->middleware('checklogin');
 Route::get('/resize', [FileController::class, 'resize']);
 Route::post('/image-resize', [FileController::class, 'imgResize'])->name('img-resize');
+Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile')->middleware('checklogin');

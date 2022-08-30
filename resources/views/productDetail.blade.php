@@ -4,7 +4,7 @@ use App\Http\Controllers\ProductDetailController;
 @extends('layouts.app')
 
 @section('content')
-<header>
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
@@ -12,7 +12,7 @@ use App\Http\Controllers\ProductDetailController;
                 <div class="card-header d-flex justify-content-between align-items-center">Product details
                 </div>
                 <div class="card-deck row mx-3">
-                  <img src="{{asset($product->image)}}" alt="Error, image could not be loaded"></img>
+                  <img src="/product_images/{{$product->image}}" alt="Error, image could not be loaded"></img>
                   {{$product->name}} <br>
                   {{$product->description}} <br>
                   <div class="row d-flex justify-content-end align-items-end">
@@ -31,5 +31,5 @@ use App\Http\Controllers\ProductDetailController;
         </div>
     </div>
 </div>
-</header>
+</body>
 @endsection

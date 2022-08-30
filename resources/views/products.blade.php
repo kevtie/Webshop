@@ -37,7 +37,7 @@ use App\Http\Controllers\OrderController;
                      <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
-                        <a href="products/details/{{$product->id}}" class="" style="text-decoration: none; color: inherit;">
+                        <a href="{{route('productdetail', ['product' => $product->id])}}" class="" style="text-decoration: none; color: inherit;">
                           <img src="{{asset($product->image)}}" alt="Error, image could not be loaded"></img>
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
