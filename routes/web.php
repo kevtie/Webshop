@@ -17,19 +17,21 @@ use App\Http\Controllers\ProfileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('auth');
-Route::get('/', [PageController::class, 'home'])->name('home')->middleware('checklogin');
-Route::get('/products', [PageController::class, 'products'])->name('product')->middleware('checklogin');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('/products/addproduct', [OrderController::class, 'addToCart'])->name('addtocart')->middleware('checklogin');
-Route::post('/products/removeproduct', [OrderController::class, 'removeFromCart'])->name('removefromcart')->middleware('checklogin');
-Route::get('/order', [PageController::class, 'order'])->name('order')->middleware('checklogin');
-Route::post('/order/buy', [OrderController::class, 'payment'])->name('pay')->middleware('checklogin');
-Route::get('/orderhistory', function(){return view('orderHistory');})->name('orderhistory')->middleware('checklogin');
-Route::get('/products/details/{product}', [ProductDetailController::class, 'getProductPage'])->name('productdetail')->middleware('checklogin');
-Route::post('/searching', [SearchController::class, 'showSearch'])->name('showSearch')->middleware('checklogin');
-Route::get('/search', [SearchController::class, 'showSearch'])->name('search')->middleware('checklogin');
+Route::group(['middleware' => ['checklogin']], function () {
+  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::get('/products', [PageController::class, 'products'])->name('product');
+  Route::post('/products/addproduct', [OrderController::class, 'addToCart'])->name('addtocart');
+  Route::post('/products/removeproduct', [OrderController::class, 'removeFromCart'])->name('removefromcart');
+  Route::get('/order', [PageController::class, 'order'])->name('order');
+  Route::post('/order/buy', [OrderController::class, 'payment'])->name('pay');
+  Route::get('/orderhistory', function(){return view('orderHistory');})->name('orderhistory');
+  Route::get('/products/details/{product}', [ProductDetailController::class, 'getProductPage'])->name('productdetail');
+  Route::post('/searching', [SearchController::class, 'showSearch'])->name('showSearch');
+  Route::get('/search', [SearchController::class, 'showSearch'])->name('search');
+  Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile');
+});
 Route::get('/resize', [FileController::class, 'resize']);
 Route::post('/image-resize', [FileController::class, 'imgResize'])->name('img-resize');
-Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile')->middleware('checklogin');
