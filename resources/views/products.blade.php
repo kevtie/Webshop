@@ -32,13 +32,12 @@ use App\Http\Controllers\OrderController;
                   </div>
                   <div class="card-deck row">
                     @foreach (ProductController::getProduct() as $product)
-                    @if($product->quantity > 0)
-                    <div class="col-md-3 my-3 mx-4">
+                    <div class="col-md-3 my-3 mx-4 rounded">
                      <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
-                        <a href="{{route('productdetail', ['product' => $product->id])}}" class="" style="text-decoration: none; color: inherit;">
-                          <img src="{{asset($product->image)}}" alt="Error, image could not be loaded"></img>
+                          <img src="/product_images/{{$product->image}}" alt="Error, image could not be loaded"/>
+                          <a href="{{route('productdetail', ['product' => $product->id])}}" class="" style="text-decoration: none; color: inherit;">
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
                             <h5 class="card-title" name="product">{{$product->name}}</h5>
@@ -49,7 +48,7 @@ use App\Http\Controllers\OrderController;
                       </a>
                       <div class="flex">
                        <ul class="list-group list-group-flush">
-                         <li class="list-group-item">
+                         <li class="list-group-item flex overflow-hidden">
                           @if(count($product->categories) < 1)
                             No relevant categories found.
                           @else
@@ -62,6 +61,7 @@ use App\Http\Controllers\OrderController;
                          </li>
                        </ul>
                      </div>
+                     @if($product->quantity > 0)
                        <div class="card-footer mt-auto my-12">
                          <div class="input-group mb-3">
                          <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}">
@@ -70,10 +70,14 @@ use App\Http\Controllers\OrderController;
                          </div>
                        </div>
                        </div>
+                       @else
+                        <div class="card-footer mt-auto my-12">
+                          <p>This product is not in stock.</p>
+                        </div>
+                       @endif
                      </form>
                      </div>
                    </div>
-                     @endif
                      @endforeach
                   </div>
               </div>

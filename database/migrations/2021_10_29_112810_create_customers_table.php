@@ -16,6 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('Email');
             $table->string('password');
             $table->integer('balance');
             $table->foreignId('role_id')->constrained('user_roles');

@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
           'name' => Str::random(10),
           'description' => Str::random(50),
-          'image' => 'product_images/default.png',
+          'image' => 'default.png',
           'price' => random_int(1, 99),
           'quantity' => random_int(0, 10),
         ]);

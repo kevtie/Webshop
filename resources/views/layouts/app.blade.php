@@ -34,7 +34,7 @@
                     </form>
                       </li>
                       <li class="navbar-text">
-                        <span class="navbar-text row mx-2">Welcome! <a href="{{route('profile', ['name' => Auth::user()->name])}}" style="text-decoration: none; color: inherit;">{{Auth::user()->name}}</a></span>
+                        <span class="navbar-text row mx-2">Welcome!<a href="{{route('profile', ['name' => Auth::user()->name])}}" style="text-decoration: none; color: inherit;">{{Auth::user()->name}}</a></span>
                       </li>
                     </ul>
                 </div>

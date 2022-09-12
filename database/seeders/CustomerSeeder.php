@@ -20,6 +20,7 @@ class CustomerSeeder extends Seeder
       DB::table('customers')->insert([
         'name' => 'kevtie',
         'password' => '$2a$12$trK0k1jF8XGugVccxa1VF.InW1.R.mwpglKu3jGpSM0TE0/ZNFSvW',
+        'Email'   => 'tiskevins@gmail.com',
         'balance' => 100000,
         'role_id' => 1
       ]);
@@ -27,6 +28,7 @@ class CustomerSeeder extends Seeder
         DB::table('customers')->insert([
           'name' => Str::random(10),
           'password' => Hash::make('password'),
+          'Email'   => 'test@email.com',
           'balance' => random_int(100, 99999),
           'role_id' => 3
         ]);
