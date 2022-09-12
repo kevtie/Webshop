@@ -14,13 +14,13 @@ use App\Http\Controllers\OrderController;
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/assets/computer.jpg" class="d-block w-100 h-75" alt="...">
+                <img src="/assets/computer.jpg" class="d-block w-100 h-75">
               </div>
               <div class="carousel-item">
-                <img src="/assets/books.jpg" class="d-block w-100 h-75" alt="...">
+                <img src="/assets/books.jpg" class="d-block w-100 h-75" >
               </div>
               <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+                <img src="..." class="d-block w-100">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

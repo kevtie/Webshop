@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -17,10 +18,10 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-      if (Auth::user() &&  Auth::user()->CheckRole == 1) {
+      if (Auth::user() &&  Auth::user()->role_id === 1) {
              return $next($request);
         }
 
-        return redirect('home')->with('error','You have not admin access');
+        return redirect()->back()->with('error','You have not admin access');
     }
 }

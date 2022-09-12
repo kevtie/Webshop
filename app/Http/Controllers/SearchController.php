@@ -16,7 +16,6 @@ class SearchController extends Controller
     return $products->get();
   }
   public static function showSearch(Request $request){
-    //dd($request->post('search'));
     $searchResults = self::getSearch($request->post('search'));
 
     return view('search.index', [

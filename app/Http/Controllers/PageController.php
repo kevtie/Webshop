@@ -18,9 +18,11 @@ class PageController extends Controller
     public function details(){
       return view('productDetail');
     }
-    public function search()
-   {
+    public function search(){
       return view('search.index');
-   }
+    }
+    public function dashboard(){
+     return view('admin');
+    }
 
 }

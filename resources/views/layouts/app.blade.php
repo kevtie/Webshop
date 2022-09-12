@@ -34,7 +34,21 @@
                     </form>
                       </li>
                       <li class="navbar-text">
-                        <span class="navbar-text row mx-2">Welcome!<a href="{{route('profile', ['name' => Auth::user()->name])}}" style="text-decoration: none; color: inherit;">{{Auth::user()->name}}</a></span>
+                        <span class="navbar-text flex row mx-2">
+                          <p>Welcome!
+                            <div class="dropdown show">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{Auth::user()->name}}
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{route('profile', ['name' => Auth::user()->name])}}">Profile</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="{{route('logout')}}">logout</a>
+                              </div>
+                            </div>
+                          </p>
+                        </span>
+                        <!---<a href="{{route('profile', ['name' => Auth::user()->name])}}" style="text-decoration: none; color: inherit;">{{Auth::user()->name}}</a>--->
                       </li>
                     </ul>
                 </div>

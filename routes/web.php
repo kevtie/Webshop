@@ -20,6 +20,8 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('auth');
+Route::get('/resize', [FileController::class, 'resize']);
+Route::post('/image-resize', [FileController::class, 'imgResize'])->name('img-resize');
 Route::group(['middleware' => ['checklogin']], function () {
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/products', [PageController::class, 'products'])->name('product');
@@ -33,5 +35,6 @@ Route::group(['middleware' => ['checklogin']], function () {
   Route::get('/search', [SearchController::class, 'showSearch'])->name('search');
   Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile');
 });
-Route::get('/resize', [FileController::class, 'resize']);
-Route::post('/image-resize', [FileController::class, 'imgResize'])->name('img-resize');
+Route::group(['middleware' => ['checkrole']], function () {
+  Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+});
