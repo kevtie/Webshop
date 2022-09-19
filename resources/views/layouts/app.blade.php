@@ -22,7 +22,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <ul class="navbar-nav ">
+                    <ul class="navbar-nav align-items-center">
                       <li class="navbar-text">
                         <form method="post" action="{{ route('showSearch') }}">
                           @csrf
@@ -34,23 +34,19 @@
                           </div>
                         </form>
                       </li>
-                    </ul>
-                    <ul class="navbar-nav">
                       <li class="navbar-text">
                         <span class="navbar-text flex row mx-2">
                           @if(Auth::check() == true)
-                          <p class="flex">Welcome!
                             <div class="dropdown">
                               <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{Auth::user()->name}}
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{route('profile', ['name' => Auth::user()->name])}}">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="{{route('settings')}}">Settings</a></li>
                                 <li><a class="dropdown-item" href="{{route('logout')}}">logout</a></li>
                               </ul>
                             </div>
-                          </p>
                             @else
                             <div class="show">
                               <a class="btn" href="{{route('login')}}">Login</a>

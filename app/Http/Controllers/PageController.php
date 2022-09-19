@@ -24,5 +24,7 @@ class PageController extends Controller
     public function dashboard(){
      return view('admin');
     }
-
+    public function settings(){
+      return view('settings');
+    }
 }

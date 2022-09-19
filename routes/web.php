@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,8 @@ Route::group(['middleware' => ['checklogin']], function () {
   Route::post('/searching', [SearchController::class, 'showSearch'])->name('showSearch');
   Route::get('/search', [SearchController::class, 'showSearch'])->name('search');
   Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile');
+  Route::get('/settings', [PageController::class, 'settings'])->name('settings');
+  Route::get('/settings/reset', [SettingsController::class, 'getInfo'])->name('reset');
 });
 Route::group(['middleware' => ['checkrole']], function () {
   Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');

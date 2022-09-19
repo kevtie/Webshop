@@ -33,7 +33,7 @@ use App\Http\Controllers\OrderController;
                   <div class="card-deck row">
                     @foreach (ProductController::getProduct() as $product)
                     <div class="col-md-3 my-3 mx-4 rounded">
-                     <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em">
+                     <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em;">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
                           <img src="/product_images/{{$product->image}}" alt="Error, image could not be loaded"/>
@@ -46,16 +46,20 @@ use App\Http\Controllers\OrderController;
                             </div>
                         </div>
                       </a>
-                      <div class="flex">
+                      <div class="flex overflow-hidden" style="height: 3em;">
                        <ul class="list-group list-group-flush">
-                         <li class="list-group-item flex overflow-hidden">
+                         <li class="list-group-item flex">
                           @if(count($product->categories) < 1)
+                            <p class="flex">
                             No relevant categories found.
+                          </p>
                           @else
-                          <div class="flex overflow-hidden row">
+                          <div class="flex row">
+                            <p class="flex">
                             @foreach ($product->categories as $category)
                               {{$category->name}}
                             @endforeach
+                          </p>
                           </div>
                           @endif
                          </li>

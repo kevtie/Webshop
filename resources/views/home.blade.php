@@ -7,7 +7,6 @@ use App\Http\Controllers\OrderController;
 @extends('layouts.app')
 
 @section('content')
-
     <div class="row justify-content-center">
         <div class="col-md-8">
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
