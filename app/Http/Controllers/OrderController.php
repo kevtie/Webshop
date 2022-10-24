@@ -34,9 +34,10 @@ class OrderController extends Controller
                          'order_status' => 0
       ]);
     }
+
     if(Product::find($request->post('productId'))->quantity >= $request->post('quantity')){
       if($orderInfo->products->contains($request->post('productId')) === true){
-        $orderInfo->products()->increment('order_quantity', $request->post('quantity'));
+        $orderInfo->products()->where('product_id', $request->post('productId'))->increment('order_quantity', $request->post('quantity'));
       }else{
         $orderInfo->products()->attach($request->post('productId'), ['order_quantity' => $request->post('quantity')]);
       }

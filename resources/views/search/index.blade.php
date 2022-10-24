@@ -31,12 +31,20 @@ use App\Http\Controllers\SearchController;
                   </form>
                   <div>
                   <table class="table table-hover">
+                    <th></th>
                     <th><b>Name</b></th>
                     <th><b>Description</b></th>
                     <th></th>
                   @forelse($search_results as $search)
                   <div>
                       <tr>
+                        <td>
+                          @if($search->image !== "" && file_exists('images/' . $search->image))
+                          <img src="/search_icon/{{$search->image}}">
+                          @else
+                          <img src="/search_icon/default.png">
+                          @endif
+                        </td>
                         <td>{{$search->name}}</td>
                         <td>{{$search->description}}</td>
                         <td><a href="products/details/{{$search->id}}" class="btn btn-outline-secondary">Go to page</a></td>

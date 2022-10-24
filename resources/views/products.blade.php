@@ -32,16 +32,22 @@ use App\Http\Controllers\OrderController;
                   </div>
                   <div class="card-deck row">
                     @foreach (ProductController::getProduct() as $product)
-                    <div class="col-md-3 my-3 mx-4 rounded">
+                    <div class="col-md-3 my-3 mx-4 rounded align-items-center">
                      <div class="card h-100 mx-2" style="width: 18em;margin-bottom: -1em;">
                        <form action="{{ route('addtocart') }}" method="post">
                         @csrf
+                        <div class="card rounded" style="width: 18em;height: 18em;">
+                        @if($product->image !== "" && file_exists('images/' . $product->image))
                           <img src="/product_images/{{$product->image}}" alt="Error, image could not be loaded"/>
+                        @else
+                          <img src="/product_images/default.png" alt="Error, image could not be loaded"/>
+                        @endif
+                      </div>
                           <a href="{{route('productdetail', ['product' => $product->id])}}" class="" style="text-decoration: none; color: inherit;">
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
                             <h5 class="card-title" name="product">{{$product->name}}</h5>
-                            <div class="overflow-hidden">
+                            <div class="flex overflow-hidden" style="height: 4em;">
                               <p class="card-text" name="description">{{$product->description}}</p>
                             </div>
                         </div>
@@ -76,7 +82,9 @@ use App\Http\Controllers\OrderController;
                        </div>
                        @else
                         <div class="card-footer mt-auto my-12">
-                          <p>This product is not in stock.</p>
+                          <div class="input-group mb-3">
+                            <p>This product is not in stock.</p>
+                          </div>
                         </div>
                        @endif
                      </form>

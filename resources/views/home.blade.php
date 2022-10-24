@@ -7,18 +7,26 @@ use App\Http\Controllers\OrderController;
 @extends('layouts.app')
 
 @section('content')
+<style>
+#carousel {
+  width: 1130px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+</style>
     <div class="row justify-content-center">
         <div class="col-md-8">
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+            <div id="carousel" class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/assets/computer.jpg" class="d-block w-100 h-75">
+                <img src="/assets/computer.jpg" class="d-block">
               </div>
               <div class="carousel-item">
-                <img src="/assets/books.jpg" class="d-block w-100 h-75" >
+                <img src="/assets/books.jpg" class="d-block" >
               </div>
               <div class="carousel-item">
-                <img src="..." class="d-block w-100">
+                <img src="..." class="d-block">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
