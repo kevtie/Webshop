@@ -46,7 +46,7 @@ use App\Http\Controllers\SearchController;
                           @endif
                         </td>
                         <td>{{$search->name}}</td>
-                        <td>{{$search->description}}</td>
+                        <td>{{Str::limit($search->description, 50)}}</td>
                         <td><a href="products/details/{{$search->id}}" class="btn btn-outline-secondary">Go to page</a></td>
                       </tr>
                   </div>

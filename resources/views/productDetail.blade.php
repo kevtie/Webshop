@@ -26,34 +26,39 @@ use App\Http\Controllers\ProductDetailController;
               @endif
               @if(Auth::user()->role_id !== 1)
               <h1 class="flex row">{{$product->name}}</h1><br><br>
-              <h3>Description</h3>
-              {{$product->description}} <br>
-              <div class="row d-flex justify-content-end align-items-end">
-                <div class="card row overflow-auto" style="width: 14rem; height: auto;">
-                  <div class="card-body btn-group">
+              <h4>Description</h4>
+              <p>{{$product->description}}</p>
+              <div class="d-flex row">
+                <h4>Categories</h4>
+                  <div class="btn-group">
                     @forelse($categories->pluck('name') as $category)
-                    <div class="d-flex"><a class="btn btn-outline-primary btn-sm" href="" style="width: auto;">{{$category}}</a></div>
+                    <form action="{{route('searchcat')}}" method="post">
+                      @csrf
+                      <input class="form-control" type="hidden" value="{{$category}}" name="searchCat">
+                      <input class="form-control" type="hidden" value="{{request()->product->id}}" name="productUrl">
+                      <input class="form-control btn btn-outline-primary btn-sm" type="submit" value="{{$category}}" style="width: auto;">
+                    </form>
                     @empty
-                    No relevant categories found!
+                      No relevant categories found!
                     @endforelse
                   </div>
-                </div>
               </div>
               <div>
+                <h4>Quantity</h4>
                 <form action="{{ route('addtocart') }}" method="post">
-                 @csrf
-                     <input type="hidden" name="productId" value="{{$product->id}}">
-              @if($product->quantity > 0)
-                  <div class="input-group mb-3">
-                  <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}">
-                  <div class="input-group-append">
-                  <input class="btn btn-outline-secondary" type="submit" value="Buy">
-                  </div>
-                </div>
-                @else
+                  	@csrf
+                    <input type="hidden" name="productId" value="{{$product->id}}">
+                    @if($product->quantity > 0)
+                      <div class="input-group mb-3">
+                        <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}">
+                        <div class="input-group-append">
+                          <input class="btn btn-outline-secondary" type="submit" value="Buy">
+                        </div>
+                      </div>
+                    @else
                      <p>This product is not in stock.</p>
-                @endif
-              </form>
+                    @endif
+                </form>
               </div>
               @else
               <form action="{{route('updateproduct')}}" method='post' enctype="multipart/form-data">

@@ -48,7 +48,7 @@ class ProductDetailController extends Controller
     public function updateProduct(Request $request){
       $categories = $request->post('category');
       $product = Product::with('categories')->where('id', $request->post('productUrl'))->first();
-      $current = Product::where('id', $request->post('productUrl'));
+      $current = Product::find($request->post('productUrl'));
       $except = Product::all()->except($request->post('productUrl'));
       if($except->pluck('name')->intersect([$request->post('productName')])->isEmpty() === true){
         $current->update([
@@ -56,31 +56,18 @@ class ProductDetailController extends Controller
                         'description' => $request->post('productDescription'),
                         'price'       => $request->post('productPrice'),
                         'quantity'    => $request->post('productQuantity'),
-                      ]);
+                         ]);
           if($request->file('productImage') !== null){
             $this->validate($request, [
               'productImage' => 'image|mimes:jpg,jpeg,png,svg,gif|max:2048',
             ]);
-            $image = $request->file('productImage');
-            $input['imagename'] = bin2hex(random_bytes(6).time()).'.'.$image->extension();
-            $filePath = public_path('/product_images');
-            $img = Image::make($image->path());
-            $img->resize(250, 250, function ($const) {
-                $const->aspectRatio();
-            })->save($filePath.'/'.$input['imagename']);
-            $filePath = public_path('/search_icon');
-            $img->resize(50, 50, function ($const) {
-                $const->aspectRatio();
-            })->save($filePath.'/'.$input['imagename']);
-            $filePath = public_path('/images');
-            $image->move($filePath, $input['imagename']);
-            if(file_exists('images/' . $current->first()->image)){
-            unlink('images/' . $current->first()->image);
-            unlink('product_images/' . $current->first()->image);
-            unlink('search_icon/' . $current->first()->image);
-            };
+            $imageCropper = new \App\Helpers\ImageCropper($request->file('productImage'));
+            $imageCropper->saveCroppedImage(250, 250, public_path('/product_images'));
+            $imageCropper->saveCroppedImage(50, 50, public_path('/search_icon'));
+            $imageCropper->saveImage(public_path('/images'));
+            $imageCropper->unlinkImage($current->image);
             $current->update([
-                     'image' => $input['imagename']
+                     'image' => $imageCropper->getImageName()
                    ]);
           }
         $product->categories()->detach();

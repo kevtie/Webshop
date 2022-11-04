@@ -33,6 +33,7 @@ Route::group(['middleware' => ['checklogin']], function () {
   Route::get('/products/details/{product}', [ProductDetailController::class, 'getProductPage'])->name('productdetail');
   Route::post('/searching', [SearchController::class, 'showSearch'])->name('showSearch');
   Route::get('/search', [SearchController::class, 'showSearch'])->name('search');
+  Route::post('/searchcat', [SearchController::class, 'showCategorySearch'])->name('searchcat');
   Route::get('profile/{name}', [ProfileController::class, 'profile'])->name('profile');
   Route::get('/settings', [PageController::class, 'settings'])->name('settings');
   Route::post('/settings/reset', [SettingsController::class, 'resetPassword'])->name('reset');

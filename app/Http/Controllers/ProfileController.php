@@ -42,22 +42,14 @@ class ProfileController extends Controller
     public function addProduct(AllFieldsRequest $request){
       $categories = $request->post('category');
       $validated = $request->validated();
-      $image = $request->file('productImage');
-      $input['imagename'] = bin2hex(random_bytes(6).time()).'.'.$image->extension();
-      $filePath = public_path('/product_images');
-      $img = Image::make($image->path());
-      $img->resize(250, 250, function ($const) {
-          $const->aspectRatio();
-      })->save($filePath.'/'.$input['imagename']);
-      $filePath = public_path('/search_icon');
-      $img->resize(50, 50, function ($const) {
-          $const->aspectRatio();
-      })->save($filePath.'/'.$input['imagename']);
-      $filePath = public_path('/images');
-      $image->move($filePath, $input['imagename']);
+      $imageCropper = new \App\Helpers\ImageCropper($request->file('productImage'));
+      $imageCropper->saveCroppedImage(250, 250, public_path('/product_images'));
+      $imageCropper->saveCroppedImage(50, 50, public_path('/search_icon'));
+      $imageCropper->saveImage(public_path('/images'));
+      
       $product = Product::create([
         'name'        => $request->post('productName'),
-        'image'       => $input['imagename'],
+        'image'       => $imageCropper->getImageName(),
         'description' => $request->post('productDescription'),
         'price'       => $request->post('productPrice'),
         'quantity'    => $request->post('productQuantity')
