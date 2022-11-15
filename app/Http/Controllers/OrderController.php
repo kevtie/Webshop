@@ -61,13 +61,14 @@ class OrderController extends Controller
   }
 
   public function payment(Request $request){
+      $customer = Customer::find(Auth::id());
       $total = 0;
       $orderInfo = $this->getOrderInfo();
       $json2 = array();
         foreach($orderInfo->products as $product){
           $total += ($product->price * $product->pivot->order_quantity);
         }
-      if(Customer::find(Auth::user()->id)->balance >= $total && $orderInfo !== null){
+      if($customer->balance >= $total && $orderInfo !== null){
         $orderInfo->order_status = 1;
         $orderInfo->save();
         foreach($orderInfo->products as $product){
@@ -78,7 +79,7 @@ class OrderController extends Controller
                         'quantity' => $product->pivot->order_quantity);
           array_push($json2, $json);
         }
-        Customer::where('id', Auth::user()->id)->decrement('balance', $total);
+        $customer->decrement('balance', $total);
         array_push($json2, array('order_status' => $orderInfo->order_status));
         $productInfo = json_encode($json2, JSON_PRETTY_PRINT);
         OrderHistory::create([

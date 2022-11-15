@@ -25,9 +25,9 @@ class ProductDetailController extends Controller
       $count = $categories->count();
       $r = $categories->pluck('name')->flatten();
       $specific = self::getProduct()->where('id', $product)->pluck('categories')->flatten()->pluck('name')->diff([$r]);
-      $checkbox = "<div class='btn-group my-3' role='group'>";
-      for ($i=0;$i<$count;$i++){
-        $category = $categories->where('id', $i+1)->first();
+      $checkbox = "<div class='btn-group mt-3' role='group'>";
+      $i=0;
+      foreach($categories as $category){
         if($specific->contains($category->name) !== true){
           $checkbox .= "<input class='btn-check' type='checkbox' name='category[]' id='{$category->name}' value='{$category->id}'>
                         <label class='btn btn-outline-primary' for='{$category->name}'>{$category->name}</label>";
@@ -35,19 +35,20 @@ class ProductDetailController extends Controller
           $checkbox .= "<input class='btn-check' type='checkbox' name='category[]' id='{$category->name}' value='{$category->id}' checked>
                         <label class='btn btn-outline-primary' for='{$category->name}' checked>{$category->name}</label>";
         }
-        if($i % 5 === 0){
-          $checkbox .= "</div>
-                        <div class='btn-group' role='group'>";
+        $i++;
+        if($i % 5 === 0 && $i !== 0){
+          $checkbox .= "</div><br>
+                        <div class='btn-group mt-3' role='group'>";
         }
 
     }
-    $checkbox .= "</div>";
+    $checkbox .= "</div><br>";
       return $checkbox;
   }
 
     public function updateProduct(Request $request){
       $categories = $request->post('category');
-      $product = Product::with('categories')->where('id', $request->post('productUrl'))->first();
+      $product = self::getProduct()->where('id', $request->post('productUrl'))->first();
       $current = Product::find($request->post('productUrl'));
       $except = Product::all()->except($request->post('productUrl'));
       if($except->pluck('name')->intersect([$request->post('productName')])->isEmpty() === true){
@@ -82,6 +83,11 @@ class ProductDetailController extends Controller
 
     public function deleteProduct(Request $request){
       $product = $this->getProduct()->where('id', $request->post('productUrl'))->first();
+      if(file_exists('images/' . $product->image)){
+      unlink('images/' . $product->image);
+      unlink('product_images/' . $product->image);
+      unlink('search_icon/' . $product->image);
+      };
       $product->categories()->detach();
       $product->delete();
       return redirect(route('product'));

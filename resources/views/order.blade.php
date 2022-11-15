@@ -47,7 +47,7 @@
               @endforelse
 
               @if(count(OrderController::checkOrder()) > 0)
-              {{$total}}
+              <h3>€{{$total}}</h3>
               <form method="post" action="{{ route('pay') }}">
                 @csrf
                 <input class="btn btn-primary" type="submit" name="order" value="Buy">

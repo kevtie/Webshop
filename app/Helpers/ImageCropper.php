@@ -19,9 +19,11 @@ class ImageCropper
         $const->aspectRatio();
     })->save($filePath.'/'.$this->imageName);
   }
+
   public function saveImage(string $filePath){
     $this->imageFile->move($filePath, $this->imageName);
   }
+
   public function unlinkImage(string $imageName){
     if(file_exists('images/' . $imageName)){
     unlink('images/' . $imageName);
@@ -29,6 +31,7 @@ class ImageCropper
     unlink('search_icon/' . $imageName);
     };
   }
+  
   public function getImageName(){
     return $this->imageName;
   }

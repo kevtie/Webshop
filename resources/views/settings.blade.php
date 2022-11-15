@@ -7,17 +7,22 @@
     $("#newPass, #cNewPass").on("keyup", function () {
       var fst=$("#newPass").val();
       var sec=$("#cNewPass").val();
-if (fst.length === 0 || sec.length === 0){
-  if (sec != fst) {
+if (fst.length === 0 || sec.length === 0 ){
+    $('#submit').prop('disabled', true);
+    $("#warning").prop('hidden', false);
+    return true;
+}else{
+  if (sec === fst) {
+    $('#submit').prop('disabled', false);
+    $("#warning").prop('hidden', true);
+    return false;
+  }else {
     $('#submit').prop('disabled', true);
     $("#warning").prop('hidden', false);
     return true;
   }
-  }else{
-    $('#submit').prop('disabled', false);
-    $("#warning").prop('hidden', true);
-    return true;
 }
+
 
     })
   })
@@ -28,7 +33,7 @@ if (fst.length === 0 || sec.length === 0){
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="flex card row pb-3 align-items-center">
-                <div class="card-header">Settings</div>
+              <div class="card-header">Settings</div>
                   <div class="flex card mt-3 ms-1" style="width: 20em;">
                     <div class="card-header"><h2>Reset password</h2></div>
                       @if($errors->any())

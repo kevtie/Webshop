@@ -33,7 +33,6 @@ class SearchController extends Controller
 
   public static function showCategorySearch(Request $request){
     $searchResults = self::getCategorySearch($request->post('searchCat'));
-    //dd(self::getCategorySearch($request->post('searchCat')));
     return view('search.index', [
       'search_results' => $searchResults
     ]);

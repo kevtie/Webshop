@@ -46,7 +46,7 @@ use App\Http\Controllers\OrderController;
                           <a href="{{route('productdetail', ['product' => $product->id])}}" class="" style="text-decoration: none; color: inherit;">
                           <div class="card-body d-flex flex-column">
                             <input type="hidden" name="productId" value="{{$product->id}}">
-                            <h5 class="card-title" name="product">{{$product->name}}</h5>
+                            <h5 class="card-title" name="product">{{$product->name}} <p>€{{number_format($product->price / 100, 2, ',', '.')}}<p></h5>
                             <div class="flex overflow-hidden" style="height: 4em;">
                               <p class="card-text" name="description">{{$product->description}}</p>
                             </div>
