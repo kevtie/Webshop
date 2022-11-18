@@ -18,7 +18,6 @@ use App\Http\Controllers\CategoryController;
                   <script>
                     function toggle(d) {
                       var x = document.getElementById(d);
-                      console.log(d, x);
                       if (x.style.display === "none") {
                         x.style.display = "block";
                       } else {

@@ -22,28 +22,9 @@ class ProductDetailController extends Controller
 
     public static function updateCheckBox($product){
       $categories = Category::get();
-      $count = $categories->count();
-      $r = $categories->pluck('name')->flatten();
-      $specific = self::getProduct()->where('id', $product)->pluck('categories')->flatten()->pluck('name')->diff([$r]);
-      $checkbox = "<div class='btn-group mt-3' role='group'>";
-      $i=0;
-      foreach($categories as $category){
-        if($specific->contains($category->name) !== true){
-          $checkbox .= "<input class='btn-check' type='checkbox' name='category[]' id='{$category->name}' value='{$category->id}'>
-                        <label class='btn btn-outline-primary' for='{$category->name}'>{$category->name}</label>";
-        }else{
-          $checkbox .= "<input class='btn-check' type='checkbox' name='category[]' id='{$category->name}' value='{$category->id}' checked>
-                        <label class='btn btn-outline-primary' for='{$category->name}' checked>{$category->name}</label>";
-        }
-        $i++;
-        if($i % 5 === 0 && $i !== 0){
-          $checkbox .= "</div><br>
-                        <div class='btn-group mt-3' role='group'>";
-        }
-
-    }
-    $checkbox .= "</div><br>";
-      return $checkbox;
+      $catName = $categories->pluck('name')->flatten();
+      $specific = self::getProduct()->where('id', $product)->pluck('categories')->flatten()->pluck('name')->diff([$catName]);
+      return view('elements/productDetailCheckbox', ['categories' => $categories, 'specific' => $specific]);
   }
 
     public function updateProduct(Request $request){
@@ -55,7 +36,7 @@ class ProductDetailController extends Controller
         $current->update([
                         'name'        => $request->post('productName'),
                         'description' => $request->post('productDescription'),
-                        'price'       => $request->post('productPrice'),
+                        'price'       => $request->post('productPrice')*100,
                         'quantity'    => $request->post('productQuantity'),
                          ]);
           if($request->file('productImage') !== null){

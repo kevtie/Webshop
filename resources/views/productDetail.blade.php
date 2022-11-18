@@ -50,7 +50,7 @@ use App\Http\Controllers\ProductDetailController;
                     <input type="hidden" name="productId" value="{{$product->id}}">
                     @if($product->quantity > 0)
                       <div class="input-group mb-3">
-                        <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}">
+                        <input class="form-control" aria-describedby="basic-addon1" type="number" name="quantity" value="1" min="1" max="{{$product->quantity / 100}}">
                         <div class="input-group-append">
                           <input class="btn btn-outline-secondary" type="submit" value="Buy">
                         </div>
@@ -69,7 +69,7 @@ use App\Http\Controllers\ProductDetailController;
                 <h5 class="mt-2">Description</h5>
                 <textarea class='form-control' name='productDescription'>{{request()->product->description}}</textarea>
                 <h5 class="mt-2">Price</h5>
-                <input class='form-control' value='{{request()->product->price}}' type='number' name='productPrice'>
+                <input class='form-control' value='{{request()->product->price / 100}}' step=".01" type='number' name='productPrice'>
                 <h5 class="mt-2">Quantity</h5>
                 <input class='form-control' value='{{request()->product->quantity}}' type='number' name='productQuantity'>
                 <h4 class="mt-2">Categories</h4>

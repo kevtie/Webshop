@@ -19,20 +19,7 @@ class AdminController extends Controller
 
   public static function categoryCheckbox(){
     $categories = self::getCategories();
-    $count = $categories->count();
-    $checkbox = "<div class='btn-group mt-3' role='group'>";
-    $i = 0;
-    foreach($categories as $category){
-      $checkbox .= "<input class='btn-check' type='checkbox' name='category[]' id='{$category->name}' value='{$category->id}'>";
-      $checkbox .= "<label class='btn btn-outline-primary' for='{$category->name}'>{$category->name}</label>";
-      $i++;
-      if($i % 5 === 0 && $i !== 0){
-        $checkbox .= "</div><br>
-                      <div class='btn-group mt-3' role='group'>";
-      }
-    }
-    $checkbox .= "</div><br>";
-    return $checkbox;
+    return view('elements/categoryCheckbox', ['categories' => $categories]);
   }
 
   public function addCategory(Request $request){
