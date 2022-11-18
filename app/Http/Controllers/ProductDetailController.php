@@ -44,9 +44,9 @@ class ProductDetailController extends Controller
               'productImage' => 'image|mimes:jpg,jpeg,png,svg,gif|max:2048',
             ]);
             $imageCropper = new \App\Helpers\ImageCropper($request->file('productImage'));
-            $imageCropper->saveCroppedImage(250, 250, public_path('/product_images'));
-            $imageCropper->saveCroppedImage(50, 50, public_path('/search_icon'));
-            $imageCropper->saveImage(public_path('/images'));
+            $imageCropper->saveCroppedImage(250, 250, asset('storage/product_images/'));
+            $imageCropper->saveCroppedImage(50, 50, asset('storage/search_icon/'));
+            $imageCropper->saveImage(asset('storage/images/'));
             $imageCropper->unlinkImage($current->image);
             $current->update([
                      'image' => $imageCropper->getImageName()

@@ -25,13 +25,13 @@ class ImageCropper
   }
 
   public function unlinkImage(string $imageName){
-    if(file_exists('images/' . $imageName)){
-    unlink('images/' . $imageName);
-    unlink('product_images/' . $imageName);
-    unlink('search_icon/' . $imageName);
+    if(file_exists(asset('storage/images') . $imageName)){
+    unlink(asset('storage/images') . $imageName);
+    unlink(asset('storage/product_images/') . $imageName);
+    unlink(asset('storage/search_icon/') . $imageName);
     };
   }
-  
+
   public function getImageName(){
     return $this->imageName;
   }
