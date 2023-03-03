@@ -13,13 +13,11 @@ class CategoryController extends Controller
    }
 
    public static function getCategories(){
-     $categories = Category::get();
-     return $categories;
+     return Category::get();
    }
 
    public static function paginateCategories(){
-      $categories = Category::paginate(5)->onEachSide(1);
-      return $categories;
+      return Category::paginate(5)->onEachSide(1);
    }
 
    public function updateCategory(Request $request){
